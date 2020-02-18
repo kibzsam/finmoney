@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './transactions.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(MyApp());
@@ -42,11 +43,11 @@ class MyApp extends StatelessWidget {
                   children: transactions.map((tx) {
                 return Card(
                   child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Column(children: [
                           Container(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(5),
                             margin: EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 10),
                             child: Icon(
@@ -58,24 +59,31 @@ class MyApp extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              tx.title,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
+                            Container(
+                              width: 100,
+                              child: Text(
+                                tx.title,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
-                            Text(
-                              tx.date.toString(),
-                            ),
+                            Container(
+                              width: 100,
+                              child: Text(
+                                DateFormat.yMMMd().format(tx.date),
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                            )
                           ],
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Text(tx.amount.toString(),
+                            Text('\$${tx.amount}',
                                 style: TextStyle(
                                     color: Colors.pinkAccent,
-                                    fontSize: 20,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.bold))
                           ],
                         )
