@@ -29,14 +29,32 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text("Personal Finance"),
         ),
-        body: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+        body: Column(crossAxisAlignment: CrossAxisAlignment.stretch,
+            // mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Container(
                 width: double.infinity,
                 child: Card(
                   child: Text("Analytics"),
+                ),
+              ),
+              Card(
+                elevation: 5,
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  child: Column(children: [
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Title'),
+                    ),
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Amount'),
+                    ),
+                    FlatButton(
+                      onPressed: () {},
+                      child: Text('Add Transaction'),
+                      textColor: Colors.purple,
+                    )
+                  ]),
                 ),
               ),
               Column(
@@ -80,11 +98,13 @@ class MyApp extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Text('\$${tx.amount}',
-                                style: TextStyle(
-                                    color: Colors.pinkAccent,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold))
+                            Text(
+                              '\$${tx.amount}',
+                              style: TextStyle(
+                                  color: Colors.pinkAccent,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold),
+                            )
                           ],
                         )
                       ]),
