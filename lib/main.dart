@@ -14,17 +14,19 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text("Personal Finance"),
         ),
-        body: Column(crossAxisAlignment: CrossAxisAlignment.stretch,
-            // mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                width: double.infinity,
-                child: Card(
-                  child: Text("Analytics"),
+        body: SingleChildScrollView(
+          child: Column(crossAxisAlignment: CrossAxisAlignment.stretch,
+              // mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  width: double.infinity,
+                  child: Card(
+                    child: Text("Analytics"),
+                  ),
                 ),
-              ),
-              UserTransactions(),
-            ]),
+                UserTransactions(),
+              ]),
+        ),
       ),
     );
   }

@@ -11,47 +11,45 @@ class TransactionList extends StatelessWidget {
         children: transactions.map((tx) {
       return Card(
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          Column(children: [
-            Container(
+          Expanded(
+            flex: 2,
+            child: Container(
               padding: EdgeInsets.all(5),
-              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
               child: Icon(
                 Icons.account_balance_wallet,
                 color: Colors.pinkAccent,
               ),
             ),
-          ]),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: 100,
-                child: Text(
-                  tx.title,
-                  style: TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold),
-                ),
-              ),
-              Container(
-                width: 100,
-                child: Text(
-                  DateFormat.yMMMd().format(tx.date),
-                  style: TextStyle(color: Colors.grey),
-                ),
-              )
-            ],
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                '\$${tx.amount}',
-                style: TextStyle(
-                    color: Colors.pinkAccent,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold),
-              )
-            ],
+          Expanded(
+            flex: 6,
+            child: Container(
+              child: Text(
+                tx.title,
+                style:
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 6,
+            child: Container(
+              child: Text(
+                DateFormat.yMMMd().format(tx.date),
+                style: TextStyle(color: Colors.grey),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Text(
+              '\$${tx.amount}',
+              style: TextStyle(
+                  color: Colors.pinkAccent,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold),
+            ),
           )
         ]),
       );
