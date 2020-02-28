@@ -24,21 +24,23 @@ class TransactionList extends StatelessWidget {
           ),
           Expanded(
             flex: 6,
-            child: Container(
-              child: Text(
-                tx.title,
-                style:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 6,
-            child: Container(
-              child: Text(
-                DateFormat.yMMMd().format(tx.date),
-                style: TextStyle(color: Colors.grey),
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  child: Text(
+                    tx.title,
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Container(
+                  child: Text(
+                    DateFormat.yMMMd().format(tx.date),
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ),
+              ],
             ),
           ),
           Expanded(

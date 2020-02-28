@@ -12,16 +12,26 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.pinkAccent,
           title: Text("Personal Finance"),
         ),
         body: SingleChildScrollView(
+          padding: EdgeInsets.all(8.0),
           child: Column(crossAxisAlignment: CrossAxisAlignment.stretch,
               // mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Container(
                   width: double.infinity,
                   child: Card(
-                    child: Text("Analytics"),
+                    child: Container(
+                      child: Center(
+                        child: Text(
+                          "Analytics",
+                          style: TextStyle(
+                              fontSize: 25.0, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
                 UserTransactions(),
