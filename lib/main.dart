@@ -1,12 +1,57 @@
-import './widgets/user_transaction.dart';
+import './widgets/new_transaction.dart';
+import './widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
+import './models/transaction.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   // This widget is the root of your application.
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final List<Transaction> _userTransactions = [
+    Transaction(
+      id: "t1",
+      title: "Addidas Yeezy",
+      amount: 109.99,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: "t2",
+      title: "Nike Shoes",
+      amount: 109.99,
+      date: DateTime.now(),
+    )
+  ];
+  //Method to create a new transaction
+  void _addNewTransaction(String txtTitle, double txtAmount) {
+    final newTx = Transaction(
+        title: txtTitle,
+        amount: txtAmount,
+        date: DateTime.now(),
+        id: DateTime.now().toString());
+    setState(() {
+      _userTransactions.add(newTx);
+    });
+  }
+
+  //Method that triggers bottom sheet
+  void transactionBottomModal(BuildContext ctx) {
+    showBottomSheet(
+        context: ctx,
+        builder: (_) {
+          return GestureDetector(
+            child: NewTransaction(_addNewTransaction),
+            onTap: () {},
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,6 +59,14 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.pinkAccent,
           title: Text("Personal Finance"),
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(
+                  Icons.settings,
+                  color: Colors.white,
+                ),
+                onPressed: null),
+          ],
         ),
         body: SingleChildScrollView(
           padding: EdgeInsets.all(8.0),
@@ -34,10 +87,26 @@ class MyApp extends StatelessWidget {
                     ),
                   ),
                 ),
-                UserTransactions(),
+                TransactionList(_userTransactions),
               ]),
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: AddActionButton(transactionBottomModal),
       ),
+    );
+  }
+}
+
+//Floating action Button
+class AddActionButton extends StatelessWidget {
+  final Function showModal;
+  AddActionButton(this.showModal);
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      child: Icon(Icons.add),
+      onPressed: () => showModal(context),
+      backgroundColor: Colors.pinkAccent,
     );
   }
 }
