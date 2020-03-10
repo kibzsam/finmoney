@@ -21,7 +21,6 @@ class NewTransaction extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Card(
-        elevation: 5,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Container(
