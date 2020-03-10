@@ -7,13 +7,23 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  // This widget is the root of your application.
+class MyApp extends StatelessWidget {
+// This widget is the root of your application.
   @override
-  _MyAppState createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyHomePage(),
+    );
+  }
 }
 
-class _MyAppState extends State<MyApp> {
+//Home Page widget
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
     Transaction(
       id: "t1",
@@ -41,9 +51,9 @@ class _MyAppState extends State<MyApp> {
   }
 
   //Method that triggers bottom sheet
-  void transactionBottomModal(BuildContext ctx) {
-    showBottomSheet(
-        context: ctx,
+  void _transactionBottomModal(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
         builder: (_) {
           return GestureDetector(
             child: NewTransaction(_addNewTransaction),
@@ -54,59 +64,47 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.pinkAccent,
-          title: Text("Personal Finance"),
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(
-                  Icons.settings,
-                  color: Colors.white,
-                ),
-                onPressed: null),
-          ],
-        ),
-        body: SingleChildScrollView(
-          padding: EdgeInsets.all(8.0),
-          child: Column(crossAxisAlignment: CrossAxisAlignment.stretch,
-              // mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  width: double.infinity,
-                  child: Card(
-                    child: Container(
-                      child: Center(
-                        child: Text(
-                          "Analytics",
-                          style: TextStyle(
-                              fontSize: 25.0, fontWeight: FontWeight.bold),
-                        ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.pinkAccent,
+        title: Text("Personal Finance"),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(
+                Icons.settings,
+                color: Colors.white,
+              ),
+              onPressed: null),
+        ],
+      ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(8.0),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.stretch,
+            // mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                width: double.infinity,
+                child: Card(
+                  child: Container(
+                    child: Center(
+                      child: Text(
+                        "Analytics",
+                        style: TextStyle(
+                            fontSize: 25.0, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
                 ),
-                TransactionList(_userTransactions),
-              ]),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: AddActionButton(transactionBottomModal),
+              ),
+              TransactionList(_userTransactions),
+            ]),
       ),
-    );
-  }
-}
-
-//Floating action Button
-class AddActionButton extends StatelessWidget {
-  final Function showModal;
-  AddActionButton(this.showModal);
-  @override
-  Widget build(BuildContext context) {
-    return FloatingActionButton(
-      child: Icon(Icons.add),
-      onPressed: () => showModal(context),
-      backgroundColor: Colors.pinkAccent,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () => _transactionBottomModal(context),
+        backgroundColor: Colors.pinkAccent,
+      ),
     );
   }
 }
