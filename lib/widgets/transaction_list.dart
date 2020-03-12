@@ -22,7 +22,7 @@ class TransactionList extends StatelessWidget {
                       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                       child: Icon(
                         Icons.account_balance_wallet,
-                        color: Colors.pinkAccent,
+                        color: Theme.of(context).primaryColorLight,
                       ),
                     ),
                   ),
@@ -53,7 +53,7 @@ class TransactionList extends StatelessWidget {
                     child: Text(
                       '\$${transactions[index].amount.toStringAsFixed(2)}',
                       style: TextStyle(
-                          color: Colors.pinkAccent,
+                          color: Theme.of(context).primaryColor,
                           fontSize: 15,
                           fontWeight: FontWeight.bold),
                     ),

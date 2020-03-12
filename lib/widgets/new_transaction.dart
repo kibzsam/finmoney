@@ -1,25 +1,41 @@
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatelessWidget {
+class NewTransaction extends StatefulWidget {
   final Function addTx;
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
+
   NewTransaction(this.addTx);
+
+  @override
+  _NewTransactionState createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  final titleController = TextEditingController();
+
+  final amountController = TextEditingController();
+
   void submitData() {
     final enteredTitle = titleController.text;
     final enteredAmount = double.parse(amountController.text);
     if (enteredTitle.isEmpty || enteredAmount <= 0) {
       return;
     }
-    addTx(
+    widget.addTx(
       enteredTitle,
       enteredAmount,
     );
+    Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(10.0),
+          topRight: Radius.circular(10.0),
+        ),
+      ),
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -35,13 +51,15 @@ class NewTransaction extends StatelessWidget {
                     fillColor: Colors.white70,
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                      borderSide: BorderSide(color: Colors.pinkAccent),
+                      borderSide: BorderSide(
+                          color: Theme.of(context).primaryColorLight),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(12.0),
                       ),
-                      borderSide: BorderSide(color: Colors.pink, width: 2),
+                      borderSide: BorderSide(
+                          color: Theme.of(context).primaryColor, width: 2),
                     ),
                   ),
                   controller: titleController,
@@ -57,13 +75,15 @@ class NewTransaction extends StatelessWidget {
                     fillColor: Colors.white70,
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                      borderSide: BorderSide(color: Colors.pinkAccent),
+                      borderSide: BorderSide(
+                          color: Theme.of(context).primaryColorLight),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(12.0),
                       ),
-                      borderSide: BorderSide(color: Colors.pink, width: 2),
+                      borderSide: BorderSide(
+                          color: Theme.of(context).primaryColor, width: 2),
                     ),
                   ),
                   controller: amountController,
@@ -73,7 +93,7 @@ class NewTransaction extends StatelessWidget {
                     onPressed: submitData,
                     child: Text('Add Transaction'),
                     textColor: Colors.white,
-                    color: Colors.pinkAccent,
+                    color: Theme.of(context).primaryColor,
                     padding: EdgeInsets.all(12.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
